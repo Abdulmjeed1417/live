@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Code Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <button id="run-python-btn">Run Python</button>
+            <button id="download-btn">Download ZIP</button>
+            <select id="theme-selector">
+                <option value="light">Light Theme</option>
+                <option value="dark">Dark Theme</option>
+            </select>
+        </div>
+        <div class="preview-pane">
+            <iframe id="preview"></iframe>
+        </div>
+        <div class="editor-pane">
+            <div class="tabs">
+                <button class="tab-button active" data-lang="html">HTML</button>
+                <button class="tab-button" data-lang="css">CSS</button>
+                <button class="tab-button" data-lang="javascript">JavaScript</button>
+                <button class="tab-button" data-lang="python">Python</button>
+            </div>
+            <div class="editor-container">
+                <div id="html-editor" class="editor"></div>
+                <div id="css-editor" class="editor" style="display: none;"></div>
+                <div id="javascript-editor" class="editor" style="display: none;"></div>
+                <div id="python-editor" class="editor" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.44.0/min/vs/loader.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
