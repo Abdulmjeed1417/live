@@ -179,13 +179,60 @@ require(['vs/editor/editor.main'], function() {
     });
 
     // Theme switcher
-    const themeSelector = document.getElementById('theme-selector');
-    themeSelector.addEventListener('change', (e) => {
-        const theme = e.target.value;
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('change', (e) => {
+        const theme = e.target.checked ? 'dark' : 'light';
         const newEditorTheme = theme === 'dark' ? 'vs-dark' : 'vs-light';
         document.documentElement.setAttribute('data-theme', theme);
         for (const editor in editors) {
             monaco.editor.setTheme(newEditorTheme);
         }
     });
+
+    // Localization
+    const translations = {
+        en: {
+            "about_us": "About Us",
+            "about_program": "About the Program",
+            "program_version": "Program Version",
+            "run_python": "Run Python",
+            "download_zip": "Download ZIP",
+            "dark_mode": "Dark Mode",
+            "html": "HTML",
+            "css": "CSS",
+            "javascript": "JavaScript",
+            "python": "Python"
+        },
+        ar: {
+            "about_us": "من نحن",
+            "about_program": "حول البرنامج",
+            "program_version": "إصدار البرنامج",
+            "run_python": "تشغيل بايثون",
+            "download_zip": "تحميل ZIP",
+            "dark_mode": "الوضع الداكن",
+            "html": "HTML",
+            "css": "CSS",
+            "javascript": "JavaScript",
+            "python": "بايثون"
+        }
+    };
+
+    const languageSwitcher = document.getElementById('language-switcher');
+    languageSwitcher.addEventListener('change', (e) => {
+        const lang = e.target.value;
+        updateLanguage(lang);
+    });
+
+    function updateLanguage(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            el.textContent = translations[lang][key];
+        });
+        document.documentElement.lang = lang;
+        if (lang === 'ar') {
+            document.documentElement.dir = 'rtl';
+        } else {
+            document.documentElement.dir = 'ltr';
+        }
+    }
 });
